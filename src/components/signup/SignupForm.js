@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import './SignupForm.css'
+import {Button} from  '../styledComponents'
 
 export default class SignupForm extends PureComponent {
 	state = {}
@@ -20,6 +21,7 @@ export default class SignupForm extends PureComponent {
 	render() {
 		return (
       <div className="signup-form">
+				<img src={require('../../img/logo.png')} alt="logo" width="400"/>
   			<form onSubmit={this.handleSubmit}>
   				<label>
             Email
@@ -49,7 +51,7 @@ export default class SignupForm extends PureComponent {
   					<p style={{color:'red'}}>The passwords do not match!</p>
   				}
 
-  				<button type="submit">Sign up</button>
+  				<Button type="submit">Sign up</Button>
   			</form>
       </div>
 		)

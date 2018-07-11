@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import './LoginForm.css'
+import {Button} from  '../styledComponents'
 
 export default class LoginForm extends PureComponent {
 	state = {}
@@ -20,6 +21,7 @@ export default class LoginForm extends PureComponent {
 	render() {
 		return (
       <div className="login-form">
+				<img src={require('../../img/logo.png')} alt="logo" width="400"/>
   			<form onSubmit={this.handleSubmit}>
   				<label>
             Email
@@ -35,7 +37,7 @@ export default class LoginForm extends PureComponent {
   					} onChange={ this.handleChange } />
           </label>
 
-  				<button type="submit">Login</button>
+  				<Button type="submit">Login</Button>
   			</form>
 		  </div>)
 	}
