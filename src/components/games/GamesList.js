@@ -56,8 +56,9 @@ class GamesList extends PureComponent {
 	}
 
 	render() {
+
 		const {games, users, authenticated, history} = this.props
-		
+	
 		if (!authenticated) return (
 				<Redirect to="/login" />
 		)
@@ -66,10 +67,7 @@ class GamesList extends PureComponent {
 		
 		const createAndRedirect = () => {
 			this.props.createGame()
-			// console.log("keys: " + this.props.games[0].id)
-			// console.log("values: " + Object.values(this.props.games[0]))
 			let newId = this.props.games[0].id + 1
-			console.log("New ID: " + newId)
 			history.push(`/games/${newId}`)
 		}
 
