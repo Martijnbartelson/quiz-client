@@ -7,11 +7,25 @@
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.MuiAppBar-colorPrimary-7 {
+  color: #fff;
+  background-color: transparent!important;
+}
+
+.MuiPaper-elevation4-15 {
+  box-shadow: none!important;
+}
+
+.MuiPaper-elevation2-13 {
+  box-shadow: none!important;
+}
+
+.outer-paper {
+  background-color: transparent!important;
+}
+
+.game-card {
+  background-color: #f6f6f6!important;
 }
 
 .App-title {

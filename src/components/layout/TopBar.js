@@ -15,8 +15,9 @@ const TopBar = (props) => {
     <AppBar position="absolute" style={{zIndex:10}}>
       <Toolbar>
         <Typography variant="title" color="inherit" style={{flex: 1}}>
-          Multiplayer Tic Tac Toe
+        {/* <img src={require('../../img/logo.png')} alt="logo" width="200"/> */}
         </Typography>
+       
         {
           user &&
           <Button color="inherit"><AccountIcon /> { user.firstName }</Button>

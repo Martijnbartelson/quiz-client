@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {signup} from '../../actions/users'
 import SignupForm from './SignupForm'
 import {Redirect} from 'react-router-dom'
+import {Center} from  '../styledComponents'
 
 class SignupPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -15,13 +16,13 @@ class SignupPage extends PureComponent {
 		)
 
 		return (
+			<Center>
 			<div>
-				<h1>Sign up</h1>
-
 				<SignupForm onSubmit={this.handleSubmit} />
 
 				<p style={{color:'red'}}>{ this.props.signup.error }</p>
 			</div>
+			</Center>
 		)
 	}
 }
