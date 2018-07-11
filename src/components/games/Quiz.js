@@ -1,22 +1,36 @@
 import React, { Component } from 'react'
+import { updateGame} from '../../actions/games'
+import {connect} from 'react-redux'
 
 class Quiz extends Component {
+   
+    handleClick = (answer) => {
+       // dispatch action.. patch /games/:id .. gameId / update
+       let {game} = this.props
+       let update = {
+            answer,
+            player: 'a',
+            question: game.currentQuestion
+       }
+       this.props.updateGame(game.id, update)
+            
+    }
+   
     render () {
         const {game} = this.props
         console.log(game);
       
         return (
             <div>
-                <h1>This is the Quiz</h1>
-                <p>{game.status}</p>
                 {/* Question */}
-                <h2>{ game.questions[0].question }</h2>
+                <h1>{ game.questions[game.currentQuestion].question }</h1>
 
                 {/* Answer */}
-                { game.questions[0].answers.map(answer=><button>{answer.answer}</button>)}
+                { game.questions[0].answers.map(answer=><button onClick={()=>this.handleClick(answer.answer)} key={answer.answer}>{answer.answer}</button>)}
             </div>
         )
     }
 }
 
-export default Quiz
+
+export default connect(null, {updateGame})(Quiz)
