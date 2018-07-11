@@ -32,7 +32,7 @@ class GameDetails extends PureComponent {
         <p>Status: {game.status}</p>
         <p>Question nr: {game.currentQuestion}</p>
         { game.status === 'pending' && <Waiting/> }
-        { game.status === 'started' && <Quiz game={game}/> }
+        { game.status === 'started' && <Quiz game={this.game}/> }
         { game.status === 'finished' && <Finished/> }
       </div>
     )

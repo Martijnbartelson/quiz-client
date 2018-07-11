@@ -7,28 +7,24 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import './GamesList.css'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import GameDetails from "./GameDetails"
-import { withRouter } from 'react-router-dom'
+import { BrowserRouter as Redirect } from 'react-router-dom'
 
 class GamesList extends PureComponent {
 	
 	componentWillMount() {
 		if (this.props.authenticated) {
-		if (this.props.games === null) this.props.getGames()
-		if (this.props.users === null) this.props.getUsers()
-		if (this.props.gamez === null) this.props.getGames()
+			if (this.props.games === null) this.props.getGames()
+			if (this.props.users === null) this.props.getUsers()
 		}
 	}
-
-
-
-	// <Route exact path="/" render={ () => <Redirect to="/games" /> } />
-	// joinGame = () => this.props.joinGame(this.props.game.id)
 	
 	renderGame = (game) => {
 		const {users, history} = this.props
 
+		const joinAndRedirect = () => {
+			joinGame(game.id)
+			history.push(`/games/${game.id}`)
+		}
 
 		return (<Card key={game.id} className="game-card">
 		<CardContent>
@@ -51,7 +47,7 @@ class GamesList extends PureComponent {
 		<CardActions>
 			
 			<Button size="small"
-			onClick={ () => { history.push(`/games/${game.id}`) }} > 
+			onClick={joinAndRedirect} > 
 			Join A Game 
 			</Button>
 
@@ -60,17 +56,20 @@ class GamesList extends PureComponent {
 	}
 
 	render() {
-		const {games, users, authenticated, createGame, history, game} = this.props
-		const createAndRedirect = () => {
-			this.props.createGame()
-			history.push(`/games/${games[0].id}`)
-		}
 
+		const {games, users, authenticated, history} = this.props
+	
 		if (!authenticated) return (
 				<Redirect to="/login" />
 		)
 
 		if (games === null || users === null) return null
+		
+		const createAndRedirect = () => {
+			this.props.createGame()
+			let newId = this.props.games[0].id + 1
+			history.push(`/games/${newId}`)
+		}
 
 		return (<Paper className="outer-paper">
 		<Button
@@ -93,7 +92,6 @@ const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   users: state.users === null ? null : state.users,
   games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
-//   game: state.games && state.games[props.match.params.id],
 })
 
 export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
