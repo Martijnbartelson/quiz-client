@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
+import {getGames, updateGame, joinGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
+// import Board from './Board'
 import Waiting from './Waiting'
 import './GameDetails.css'
 import Finished from './Finished';
@@ -17,8 +18,6 @@ class GameDetails extends PureComponent {
       if (this.props.users === null) this.props.getUsers()
     }
   }
-
-  // joinGame = () => this.props.joinGame(this.props.game.id)
 
   render() {
     const { game, users, authenticated } = this.props

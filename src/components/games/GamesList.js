@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
+import {getGames, createGame, joinGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import Button from 'material-ui/Button'
@@ -11,18 +11,8 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import GameDetails from "./GameDetails"
 import { withRouter } from 'react-router-dom'
 
-
 class GamesList extends PureComponent {
-
-	Button = withRouter(({ history }) => (
-		<button
-		type='button'
-		onClick={ () => { history.push('/games/${game.id}') }}
-		>
-		Join A Game
-		</button>
-	))
-
+	
 	componentWillMount() {
 		if (this.props.authenticated) {
 		if (this.props.games === null) this.props.getGames()
@@ -31,12 +21,18 @@ class GamesList extends PureComponent {
 		}
 	}
 
-	// componentDidMount() {
-	// 		console.log("props.games: " + Object.values(this.props.gamezzz))
-	// }
+	
 
+	joinAndRedirect = () => {
+		
+	}
+
+	// <Route exact path="/" render={ () => <Redirect to="/games" /> } />
+	// joinGame = () => this.props.joinGame(this.props.game.id)
+	
 	renderGame = (game) => {
 		const {users, history} = this.props
+
 
 		return (<Card key={game.id} className="game-card">
 		<CardContent>
@@ -55,42 +51,24 @@ class GamesList extends PureComponent {
 			Status: {game.status}
 			</Typography>
 		</CardContent>
-		{/* <CardActions>
-			<Button
-			size="small"
-			onClick={() => history.push(`/games/${game.id}`)}
-			>
-			Watch
-			</Button>
-		</CardActions> */}
-		<Router>
+
 		<CardActions>
 			
-			<Button>
-			{/* <Route exact path="/" component={GameDetails} render={ () => <Redirect to={`/games/${game.id}`} /> } /> */}
-			{/* <Route exact path="/games" component={GameDetails} /> */}
-			Join A Game
+			<Button size="small"
+			onClick={ () => { history.push(`/games/${game.id}`) }} > 
+			Join A Game 
 			</Button>
 
 		</CardActions>
-		</Router>
 		</Card>)
 	}
 
-		// import { withRouter } from 'react-router-dom'
-		// // this also works with react-router-native
-
-		// const Button = withRouter(({ history }) => (
-		// <button
-		// type='button'
-		// onClick={() => { history.push('/new-location') }}
-		// >
-		// Click Me!
-		// </button>
-		// ))
-
 	render() {
-		const {games, users, authenticated, createGame} = this.props
+		const {games, users, authenticated, createGame, history, game} = this.props
+		const createAndRedirect = () => {
+			this.props.createGame()
+			history.push(`/games/${games[games.length-1].id}`)
+		}
 
 		if (!authenticated) return (
 				<Redirect to="/login" />
@@ -102,7 +80,7 @@ class GamesList extends PureComponent {
 		<Button
 			color="primary"
 			variant="raised"
-			onClick={createGame}
+			onClick={createAndRedirect}
 			className="create-game"
 		>
 			Create Game
@@ -115,10 +93,11 @@ class GamesList extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   users: state.users === null ? null : state.users,
-  games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id)
+  games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
+//   game: state.games && state.games[props.match.params.id],
 })
 
 export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
