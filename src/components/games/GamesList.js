@@ -21,11 +21,7 @@ class GamesList extends PureComponent {
 		}
 	}
 
-	
 
-	joinAndRedirect = () => {
-		
-	}
 
 	// <Route exact path="/" render={ () => <Redirect to="/games" /> } />
 	// joinGame = () => this.props.joinGame(this.props.game.id)
@@ -67,7 +63,7 @@ class GamesList extends PureComponent {
 		const {games, users, authenticated, createGame, history, game} = this.props
 		const createAndRedirect = () => {
 			this.props.createGame()
-			history.push(`/games/${games[games.length-1].id}`)
+			history.push(`/games/${games[0].id}`)
 		}
 
 		if (!authenticated) return (
