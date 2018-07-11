@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
+import {getGames, updateGame, joinGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
 import Paper from 'material-ui/Paper'
-import Board from './Board'
+// import Board from './Board'
 import './GameDetails.css'
 
 class GameDetails extends PureComponent {
@@ -16,8 +16,6 @@ class GameDetails extends PureComponent {
       if (this.props.users === null) this.props.getUsers()
     }
   }
-
-  joinGame = () => this.props.joinGame(this.props.game.id)
 
   render() {
     const {game, users, authenticated, userId} = this.props
@@ -60,8 +58,8 @@ class GameDetails extends PureComponent {
       <hr />
 
       {
-        game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        game.status !== 'pending'
+        // <Board board={game.board} makeMove={this.makeMove} />
       }
     </Paper>)
   }
