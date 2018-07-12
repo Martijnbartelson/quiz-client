@@ -85,12 +85,14 @@ export const StyledForm = styled.form`
 `;
 
 export const Button = styled.button`
-   
+    border: none;
     padding: 0.35em 1.4em;
     margin: 10px 0px;
+    margin-right: 10px;
     background-color: #fef28f;
     color: #333;
-    cursor: pointer;   
+    cursor: pointer; 
+    font-size: 18px;  
 `;
 
 export const Input = styled.input`

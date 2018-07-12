@@ -51,7 +51,7 @@ export default class SignupForm extends PureComponent {
   					<p style={{color:'red'}}>The passwords do not match!</p>
   				}
 
-  				<Button type="submit">Sign up</Button>
+  				<Button className="btn-right" type="submit">Sign up</Button>
   			</form>
       </div>
 		)

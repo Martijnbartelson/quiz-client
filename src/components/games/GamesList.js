@@ -48,7 +48,7 @@ class GamesList extends PureComponent {
 			
 			<Button size="small"
 			onClick={joinAndRedirect} > 
-			Join A Game 
+			Join Game 
 			</Button>
 
 		</CardActions>
@@ -87,12 +87,15 @@ class GamesList extends PureComponent {
 			// onClick={ funcOne() }
 			className="create-game"
 		>
+
 			{/* <Button 
 			onClick={ funcTwo() }> */}
 				Create Game
 			{/* </Button> */}
+
 		</Button>
 
+		<h2>Join a game:</h2>
 		<div>
 			{games.map(game => this.renderGame(game))}
 		</div>
