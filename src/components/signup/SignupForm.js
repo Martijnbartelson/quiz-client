@@ -23,6 +23,12 @@ export default class SignupForm extends PureComponent {
       <div className="signup-form">
 				<img src={require('../../img/logo.png')} alt="logo" width="400"/>
   			<form onSubmit={this.handleSubmit}>
+					<label>
+							Name
+							<input type="name" name="name" value={
+								this.state.name || ''
+							} onChange={ this.handleChange } />
+          </label>
   				<label>
             Email
             <input type="email" name="email" value={
