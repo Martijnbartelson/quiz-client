@@ -37,7 +37,7 @@ export default class LoginForm extends PureComponent {
   					} onChange={ this.handleChange } />
           </label>
 
-  				<Button type="submit">Login</Button>
+  				<Button className="btn-right" type="submit">Login</Button>
   			</form>
 		  </div>)
 	}
