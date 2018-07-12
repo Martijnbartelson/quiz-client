@@ -27,7 +27,7 @@ class GameDetails extends PureComponent {
 
     return (
       <div>
-        <h1 className="game-title">Game #{game.id}</h1>
+        <h2 className="game-title">Game #{game.id}</h2>
         { game.status === 'pending' && <Waiting/> }
         { game.status === 'started' && <Quiz game={game}/> }
         { game.status === 'finished' && <Finished game={game}/> }

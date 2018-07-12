@@ -17,11 +17,6 @@ class Quiz extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.game.currentQuestion!==this.props.game.currentQuestion){
-
-            // TODO set time out to delay the start of the next question
-            // Hide the question and the answers for x seconds. 
-            // Show the message and the scores for x seconds.
-
             setTimeout(()=>{
                 this.setState((prevState, props) => ({
                         seconds: prevState.seconds + 0.00001,
@@ -57,8 +52,14 @@ class Quiz extends Component {
                 player:  user.id === game.players[0].user.id ? 'a' : 'b',
                 question: game.currentQuestion
         }
-        this.props.updateGame(game.id, update)         
-        }
+        this.props.updateGame(game.id, update)   
+        this.setState({
+            timer: false,
+            question: false,
+            answer: false,
+            feedback: true
+        })         
+    }
 
     render () {
         const {game} = this.props
@@ -68,32 +69,37 @@ class Quiz extends Component {
 
         return (
             <div>
-                <p>Status: {game.status}</p>
-                <p>Question {game.currentQuestion+1}/10</p>
+                <p className="questions">Question {game.currentQuestion+1}/10</p>
                 { question && 
-                    <div>
+                    <div className="question">
                         <h1>{ game.questions[game.currentQuestion].question }</h1>
                     </div>}
 
-                { answer && <div>
+                <div className="middle">
+                    <div>
+                        <h2>Player a score: {game.scores.a}</h2>
+                    </div>
+
+                    { timer && <div>
+                        <ReactCountdownClock seconds={this.state.seconds}
+                            color="#000"
+                            alpha={0.9}
+                            size={300}
+                            onComplete={this.handleTimout}/>
+                    </div> }
+
+                    <div>
+                        <h2>Player b score: {game.scores.b}</h2>
+                    </div>
+                </div>    
+
+
+                { answer && <div className="answer">
                     { game.questions[game.currentQuestion].answers.map(answer=><Button onClick={()=>this.handleClick(answer.answer)} key={answer.answer}>{answer.answer}</Button>)}
-                </div> }
-
-                <div>
-                    <h2>Player a score: {game.scores.a}</h2>
-                    <h2>Player b score: {game.scores.b}</h2>
-                </div>
-
-                { timer && <div>
-                    <ReactCountdownClock seconds={this.state.seconds}
-                        color="#000"
-                        alpha={0.9}
-                        size={300}
-                        onComplete={this.handleTimout}/>
                 </div> }       
 
-                { feedback && <div>
-                    <h2>{ game.scores.message }</h2>
+                { feedback && <div className="feedback">
+                    <h1>{ game.scores.message }</h1>
                 </div>   } 
             </div>
         )

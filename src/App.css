@@ -13,6 +13,40 @@
   color: white;
 }
 
+.question{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.middle{
+  display: flex;
+  justify-content: center;
+}
+
+.answer{
+  margin-top: 30px;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.questions{
+  text-align: center;
+}
+
+.feedback{
+  text-align: center;
+}
+
+.finished{
+  text-align: center;
+  color: white;
+}
+
+
+
 .game-shout{
   text-align: center;
   color: white;

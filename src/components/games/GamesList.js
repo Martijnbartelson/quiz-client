@@ -22,7 +22,7 @@ class GamesList extends PureComponent {
 		const {users, history} = this.props
 
 		const joinAndRedirect = () => {
-			joinGame(game.id)
+			this.props.joinGame(game.id)
 			history.push(`/games/${game.id}`)
 		}
 
@@ -30,11 +30,11 @@ class GamesList extends PureComponent {
 		<CardContent>
 			<Typography color="textSecondary">
 			This game is played by&nbsp;
-			{/* {
+			{
 				game.players
-				.map(player => users[player.userId].firstName)
+				.map(player => player.user.name)
 				.join(' and ')
-			} */}
+			}
 			</Typography>
 			<Typography variant="headline" component="h2">
 			Game #{game.id}
@@ -81,7 +81,7 @@ class GamesList extends PureComponent {
 			Create a Game
 		</Button>
 
-		<h2>Join a game:</h2>
+		<h2>Or join a game:</h2>
 		<div>
 			{games.map(game => this.renderGame(game))}
 		</div>
@@ -95,4 +95,4 @@ const mapStateToProps = (state, props) => ({
   games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
 })
 
-export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
+export default connect(mapStateToProps, {getGames, getUsers, createGame, joinGame})(GamesList)
