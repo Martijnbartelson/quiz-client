@@ -1,3 +1,4 @@
+import './GamesList.css'
 import React, {PureComponent} from 'react'
 import {getGames, createGame, joinGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
@@ -6,7 +7,6 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import './GamesList.css'
 import { BrowserRouter as Redirect } from 'react-router-dom'
 
 class GamesList extends PureComponent {
@@ -20,7 +20,7 @@ class GamesList extends PureComponent {
 	
 	renderGame = (game) => {
 		const {users, history} = this.props
-
+		// console.log("game - ID ???: " + game.id)
 		const joinAndRedirect = () => {
 			joinGame(game.id)
 			history.push(`/games/${game.id}`)
@@ -65,6 +65,14 @@ class GamesList extends PureComponent {
 
 		if (games === null || users === null) return null
 		
+		// const funcOne = () => {
+		// 	this.props.createGame()
+		// }
+
+		// const funcTwo = () => {
+		// 	this.props.getGames()
+		// 	history.push(`/games/${this.props.games[0].id}`)
+		// }
 		const createAndRedirect = () => {
 			this.props.createGame()
 			let newId = this.props.games[0].id + 1
@@ -76,9 +84,13 @@ class GamesList extends PureComponent {
 			color="primary"
 			variant="raised"
 			onClick={createAndRedirect}
+			// onClick={ funcOne() }
 			className="create-game"
 		>
-			Create Game
+			{/* <Button 
+			onClick={ funcTwo() }> */}
+				Create Game
+			{/* </Button> */}
 		</Button>
 
 		<div>
@@ -89,9 +101,9 @@ class GamesList extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => ({
-  authenticated: state.currentUser !== null,
-  users: state.users === null ? null : state.users,
-  games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
+	authenticated: state.currentUser !== null,
+	users: state.users === null ? null : state.users,
+	games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
 })
 
 export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
