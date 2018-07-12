@@ -17,6 +17,13 @@ class Quiz extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.game.currentQuestion!==this.props.game.currentQuestion){
+            console.log('question answered');
+            this.setState({
+                timer: false,
+                question: false,
+                answer: false,
+                feedback: true
+            })       
             setTimeout(()=>{
                 this.setState((prevState, props) => ({
                         seconds: prevState.seconds + 0.00001,
@@ -75,8 +82,8 @@ class Quiz extends Component {
                     </div>}
 
                 <div className="middle">
-                    <div>
-                        <h2>Player a score: {game.scores.a}</h2>
+                    <div className="score-board-a">
+                        <h1>{game.players[0].user.name}: {game.scores.a} points</h1>
                     </div>
 
                     { timer && <div>
@@ -87,8 +94,8 @@ class Quiz extends Component {
                             onComplete={this.handleTimout}/>
                     </div> }
 
-                    <div>
-                        <h2>Player b score: {game.scores.b}</h2>
+                    <div className="score-board-b">
+                        <h1>{game.players[1].user.name}: {game.scores.b} points</h1>
                     </div>
                 </div>    
 

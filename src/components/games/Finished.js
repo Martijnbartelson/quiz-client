@@ -5,9 +5,9 @@ class Finished extends Component {
         return (
             <div className="finished">
                 <h1 className="game-shout">The game is finished.</h1>
-                <h1>Player {this.props.game.winner} won!</h1>
-                <h2>Player a score: {this.props.game.scores.a}</h2>
-                <h2>Player b score: {this.props.game.scores.b}</h2>
+                <h1>{this.props.game.winner === 'a' ? this.props.game.players[0].user.name : this.props.game.players[1].user.name } won!</h1>
+                <h2>{this.props.game.players[0].user.name}: {this.props.game.scores.a} points</h2>
+                <h2>{this.props.game.players[1].user.name}: {this.props.game.scores.b} points</h2>
             </div>
         )
     }
