@@ -5,7 +5,7 @@ class Waiting extends Component {
         return (
             <div>
                 <h1 className="game-shout">Waiting for an other player to join the game</h1>
-                <div class="loader">Loading...</div>
+                <div className="loader">Loading...</div>
             </div>
         )
     }

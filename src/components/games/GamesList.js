@@ -28,16 +28,16 @@ class GamesList extends PureComponent {
 
 		return (<Card key={game.id} className="game-card">
 		<CardContent>
+		<Typography variant="headline" component="h2">
+			Game #{game.id}
+			</Typography>
 			<Typography color="textSecondary">
-			This game is played by&nbsp;
+			This game is joined by&nbsp;
 			{
 				game.players
 				.map(player => player.user.name)
 				.join(' and ')
 			}
-			</Typography>
-			<Typography variant="headline" component="h2">
-			Game #{game.id}
 			</Typography>
 			<Typography color="textSecondary">
 			Status: {game.status}
@@ -59,9 +59,7 @@ class GamesList extends PureComponent {
 
 		const {games, users, authenticated, history} = this.props
 	
-		if (!authenticated) return (
-				<Redirect to="/login" />
-		)
+		if (!authenticated){history.push(`/login`)}
 
 		if (games === null || users === null) return null
 		
@@ -95,7 +93,7 @@ class GamesList extends PureComponent {
 
 		</Button>
 
-		<h2>Or join a game:</h2>
+		<h2 className="join-game">Or join a game:</h2>
 		<div>
 			{games.map(game => this.renderGame(game))}
 		</div>

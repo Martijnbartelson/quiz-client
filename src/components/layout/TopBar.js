@@ -23,7 +23,7 @@ const TopBar = (props) => {
           <div className="logo-wrapper"><Typography variant="title" color="inherit" style={{flex: 1}}>
           <img src={require('../../img/logo.png')} className="logo" alt="logo" width="200"/> 
           </Typography>
-          <Button color="inherit"><AccountIcon /> { user.firstName } </Button></div>
+          <Button color="inherit"><AccountIcon /> { user.email } </Button></div>
         }
 
         {

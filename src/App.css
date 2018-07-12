@@ -8,15 +8,25 @@
   left: 30px;
 }
 
+.outer-paper {
+  width: 70%!important;
+}
+
+.join-game {
+ 
+  padding-top: 20px;
+}
 .game-title{
   text-align: center;
   color: white;
+  padding-top: 30px;
 }
 
 .question{
   width: 100%;
   text-align: center;
   margin-bottom: 20px;
+  color:#662485;
 }
 
 .middle{
@@ -34,10 +44,26 @@
 
 .questions{
   text-align: center;
+  color: white;
 }
 
 .feedback{
   text-align: center;
+  color: white;
+}
+
+.score-board-a{
+  color: white;
+  font-size: 11px;
+  float: left;
+  margin: auto;
+}
+
+.score-board-b{
+  color: white;
+  font-size: 11px;
+  float: right;
+  margin: auto;
 }
 
 .finished{
@@ -45,7 +71,13 @@
   color: white;
 }
 
+.MuiButton-raisedPrimary-69 {
+  background-color: #662485!important;
+}
 
+.MuiButton-sizeSmall-74 {
+  float: right;
+}
 
 .game-shout{
   text-align: center;
