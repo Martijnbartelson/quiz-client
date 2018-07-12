@@ -20,7 +20,7 @@ class GameDetails extends PureComponent {
 
   render() {
     const { game, users, authenticated } = this.props
-
+	
     if (!authenticated) return (<Redirect to="/login" />)
     if (game === null || users === null) return 'Loading...'
     if (!game) return 'Not found'
@@ -31,6 +31,7 @@ class GameDetails extends PureComponent {
         { game.status === 'pending' && <Waiting/> }
         { game.status === 'started' && <Quiz game={game}/> }
         { game.status === 'finished' && <Finished game={game}/> }
+
       </div>
     )
   }
@@ -39,7 +40,7 @@ class GameDetails extends PureComponent {
 const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   userId: state.currentUser && userId(state.currentUser.jwt),
-  game: state.games && state.games[props.match.params.id],
+  game: state.games && state.games[Number(props.match.params.id)],
   users: state.users
 })
 
