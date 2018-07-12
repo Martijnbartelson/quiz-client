@@ -2,6 +2,7 @@ import io from 'socket.io-client'
 import {baseUrl} from './constants'
 
 export default class SocketIO {
+  
   socket = null
 
   connect(dispatch, jwt) {

@@ -20,8 +20,7 @@ class GamesList extends PureComponent {
 	}
 	
 	renderGame = (game) => {
-		const {users, history} = this.props
-		// console.log("game - ID ???: " + game.id)
+		const {history} = this.props
 		const joinAndRedirect = () => {
 			this.props.joinGame(game.id)
 			history.push(`/games/${game.id}`)
@@ -59,19 +58,12 @@ class GamesList extends PureComponent {
 	render() {
 
 		const {games, users, authenticated, history} = this.props
-	
-		if (!authenticated) return (<Redirect to="/login" />)
+		console.log(authenticated);
+		
+		if (!authenticated) {history.push(`/login`)}
 
 		if (games === null || users === null) return null
 		
-		// const funcOne = () => {
-		// 	this.props.createGame()
-		// }
-
-		// const funcTwo = () => {
-		// 	this.props.getGames()
-		// 	history.push(`/games/${this.props.games[0].id}`)
-		// }
 		const createAndRedirect = () => {
 			this.props.createGame()
 			let newId = this.props.games[0].id + 1
@@ -83,15 +75,8 @@ class GamesList extends PureComponent {
 			color="primary"
 			variant="raised"
 			onClick={createAndRedirect}
-			// onClick={ funcOne() }
-			className="create-game"
-		>
-
-			{/* <Button 
-			onClick={ funcTwo() }> */}
+			className="create-game">
 				Create Game
-			{/* </Button> */}
-
 		</Button>
 
 		<h2>Or join a game:</h2>
