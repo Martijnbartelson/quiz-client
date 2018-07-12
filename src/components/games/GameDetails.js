@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom'
 import {getGames, updateGame, joinGame} from '../../actions/games'
 import {getUsers} from '../../actions/users'
 import {userId} from '../../jwt'
-// import Board from './Board'
 import Waiting from './Waiting'
 import './GameDetails.css'
 import Finished from './Finished';
@@ -28,12 +27,11 @@ class GameDetails extends PureComponent {
 
     return (
       <div>
-        <h1>Game #{game.id}</h1>
-        <p>Status: {game.status}</p>
-        <p>Question nr: {game.currentQuestion}</p>
+        <h1 className="game-title">Game #{game.id}</h1>
         { game.status === 'pending' && <Waiting/> }
         { game.status === 'started' && <Quiz game={game}/> }
-        { game.status === 'finished' && <Finished/> }
+        { game.status === 'finished' && <Finished game={game}/> }
+
       </div>
     )
   }
