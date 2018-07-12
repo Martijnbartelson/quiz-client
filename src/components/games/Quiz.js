@@ -19,7 +19,7 @@ class Quiz extends Component {
    
     render () {
         const {game} = this.props
-        console.log(game);
+
         if (game === null) return 'Loading...'
       
         return (

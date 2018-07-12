@@ -12,6 +12,7 @@ import { BrowserRouter as Redirect } from 'react-router-dom'
 class GamesList extends PureComponent {
 	
 	componentWillMount() {
+		
 		if (this.props.authenticated) {
 			if (this.props.games === null) this.props.getGames()
 			if (this.props.users === null) this.props.getUsers()
@@ -22,7 +23,7 @@ class GamesList extends PureComponent {
 		const {users, history} = this.props
 		// console.log("game - ID ???: " + game.id)
 		const joinAndRedirect = () => {
-			joinGame(game.id)
+			this.props.joinGame(game.id)
 			history.push(`/games/${game.id}`)
 		}
 
@@ -59,9 +60,7 @@ class GamesList extends PureComponent {
 
 		const {games, users, authenticated, history} = this.props
 	
-		if (!authenticated) return (
-				<Redirect to="/login" />
-		)
+		if (!authenticated) return (<Redirect to="/login" />)
 
 		if (games === null || users === null) return null
 		
@@ -106,4 +105,4 @@ const mapStateToProps = (state, props) => ({
 	games: state.games === null ? null : Object.values(state.games).sort((a, b) => b.id - a.id),
 })
 
-export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
+export default connect(mapStateToProps, {getGames, getUsers, createGame, joinGame})(GamesList)
