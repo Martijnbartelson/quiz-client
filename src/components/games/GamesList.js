@@ -18,6 +18,15 @@ class GamesList extends PureComponent {
 			if (this.props.users === null) this.props.getUsers()
 		}
 	}
+
+	componentDidUpdate(){
+		// if ( prevProps.games !== this.props.games ) {
+			this.props.getGames()
+			// console.log(prevProps.games)
+			// console.log(this.props.games)
+		// }
+	
+	}
 	
 	renderGame = (game) => {
 		const {history} = this.props
@@ -66,13 +75,12 @@ class GamesList extends PureComponent {
 		}
 
 		const funcTwo = () => {
-			this.props.getGames()
 			history.push(`/games/${this.props.games[0].id}`)
 		}
 	
-		const createAndRedirect = () => {
+		const createAndRedirect = async () => {
 			funcOne()
-			funcTwo()
+			setTimeout(funcTwo, 300)
 
 			// this.props.createGame()
 			// let newId = this.props.games[0].id + 1
