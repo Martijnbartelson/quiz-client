@@ -47,7 +47,6 @@ export const getGames = (options) => (dispatch, getState) => {
 export const joinGame = (gameId) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
-	console.log("whats up!")
   if (isExpired(jwt)) return dispatch(logout())
 
   request
