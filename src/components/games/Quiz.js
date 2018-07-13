@@ -90,7 +90,7 @@ class Quiz extends Component {
                         <ReactCountdownClock seconds={this.state.seconds}
                             color="#000"
                             alpha={0.9}
-                            size={300}
+                            size={250}
                             onComplete={this.handleTimout}/>
                     </div> }
 

@@ -57,7 +57,6 @@ class GamesList extends PureComponent {
 	}
 
 	render() {
-
 		const {games, users, authenticated, history} = this.props
 	
 		if (!authenticated){history.push(`/login`)}
