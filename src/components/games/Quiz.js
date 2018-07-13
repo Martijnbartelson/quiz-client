@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { updateGame} from '../../actions/games'
 import {connect} from 'react-redux'
-import {Button} from '../styledComponents'
+import {ButtonB} from '../styledComponents'
 import ReactCountdownClock from 'react-countdown-clock'
 import {userId} from '../../jwt'
 
@@ -72,12 +72,36 @@ class Quiz extends Component {
         const {question,answer,timer,feedback} = this.state
         if (game === null) return 'Loading...'
 
+        function createQ() {
+            return {__html: game.questions[game.currentQuestion].question};
+          }
+         
+          function createA(answer) {
+            return {__html: answer};
+          }
+          function shuffle(arra1) {
+            var ctr = arra1.length, temp, index;
+        
+        // While there are elements in the array
+            while (ctr > 0) {
+        // Pick a random index
+                index = Math.floor(Math.random() * ctr);
+        // Decrease ctr by 1
+                ctr--;
+        // And swap the last element with it
+                temp = arra1[ctr];
+                arra1[ctr] = arra1[index];
+                arra1[index] = temp;
+            }
+            return arra1;
+        }
+
         return (
             <div>
                 <p className="questions">Question {game.currentQuestion+1}/10</p>
                 { question && 
                     <div className="question">
-                        <h1>{ game.questions[game.currentQuestion].question }</h1>
+                        <h1 dangerouslySetInnerHTML={ createQ()}></h1>
                     </div>}
 
                 <div className="middle">
@@ -87,7 +111,7 @@ class Quiz extends Component {
 
                     { timer && <div>
                         <ReactCountdownClock seconds={this.state.seconds}
-                            color="#000"
+                            color="#d07575"
                             alpha={0.9}
                             size={250}
                             onComplete={this.handleTimout}/>
@@ -100,7 +124,9 @@ class Quiz extends Component {
 
 
                 { answer && <div className="answer">
-                    { game.questions[game.currentQuestion].answers.map(answer=><Button onClick={()=>this.handleClick(answer.answer)} key={answer.answer}>{answer.answer}</Button>)}
+                    { shuffle(game.questions[game.currentQuestion].incorrect_answers)
+                        
+                        .map(answer=><ButtonB onClick={()=>this.handleClick(answer)} key={answer}><p dangerouslySetInnerHTML={ createA(answer)}></p></ButtonB>)}
                 </div> }       
 
                 { feedback && <div className="feedback">

@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography'
 // import { BrowserRouter as Redirect } from 'react-router-dom'
 
 class GamesList extends PureComponent {
-	
+	state={newgame:false}
 	componentWillMount() {
 		
 		if (this.props.authenticated) {
@@ -28,6 +28,19 @@ class GamesList extends PureComponent {
 	
 	}
 	
+	newgame = () =>{
+		this.setState({newgame:true})
+	}
+
+	handleChange = (e) => {
+		this.setState({
+			[e.currentTarget.name]:e.currentTarget.value
+		})
+		console.log(this.state);
+		
+	}
+
+
 	renderGame = (game) => {
 		const {history} = this.props
 		// console.log("game - ID ???: " + game.id)
@@ -76,25 +89,22 @@ class GamesList extends PureComponent {
 
 		const funcTwo = () => {
 			history.push(`/games/${this.props.games[0].id}`)
-		}
-	
-		const createAndRedirect = async () => {
+		}		
+      
+		const createAndRedirect = () => {
+			this.props.createGame({category:this.state.category,difficulty: this.state.difficulty})
 			funcOne()
 			setTimeout(funcTwo, 300)
-
-			// this.props.createGame()
-			// let newId = this.props.games[0].id + 1
-			// history.push(`/games/${newId}`)
 		}
 
+		return (
+		<div>
+		<Paper className="outer-paper">
 
-		if (games === null || users === null) return null
-		
-		return (<Paper className="outer-paper">
 		<Button
 			color="primary"
 			variant="raised"
-			onClick={createAndRedirect}
+			onClick={this.newgame}
 			// onClick={ funcOne() }
 			className="create-game"
 		>
@@ -110,7 +120,55 @@ class GamesList extends PureComponent {
 		<div>
 			{games.map(game => this.renderGame(game))}
 		</div>
-		</Paper>)
+		</Paper>
+		{ this.state.newgame && <div className="addScreen">
+			<div className="newGameForm">
+				<form>
+					<h2>Categories</h2>
+					<label>
+						<input type="radio" name='category' 
+						value="11" 
+						onChange={this.handleChange}> 
+						</input>Films
+					</label>
+					<label>
+						<input type="radio" name='category' 
+						value="12" 
+						onChange={this.handleChange}> 
+						</input>Music
+					</label>  
+          		</form>
+				  <form>
+					<h2>Difficulty</h2>
+					<label>
+						<input type="radio" name='difficulty' 
+						value="easy" 
+						onChange={this.handleChange}> 
+						</input>Easy
+					</label>
+					<label>
+						<input type="radio" name='difficulty' 
+						value="medium" 
+						onChange={this.handleChange}> 
+						</input>Medium
+					</label>  
+					<label>
+						<input type="radio" name='difficulty' 
+						value="hard"
+						onChange={this.handleChange}> 
+						</input>Hard
+					</label> 
+					<Button
+						color="primary"
+						variant="raised"
+						onClick={createAndRedirect}
+						className="create-game"
+					>Create Game</Button>
+          		</form>
+			</div>
+			</div>}
+		</div>	
+	)
   }
 }
 

@@ -95,6 +95,18 @@ export const Button = styled.button`
     font-size: 18px;  
 `;
 
+export const ButtonB = styled.button`
+    border: none;
+    padding:  0px 5px;
+    margin: 10px 0px;
+    margin-right: 10px;
+    background-color: #662485;
+    color: white;
+    cursor: pointer; 
+    font-size: 14px;  
+`;
+
+
 export const Input = styled.input`
     margin: 5px;
     padding: 5px;
