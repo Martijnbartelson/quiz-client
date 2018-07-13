@@ -17,7 +17,6 @@ class Quiz extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.game.currentQuestion!==this.props.game.currentQuestion){
-            console.log('question answered');
             this.setState({
                 timer: false,
                 question: false,
