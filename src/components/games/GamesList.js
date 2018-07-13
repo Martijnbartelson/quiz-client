@@ -7,7 +7,7 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import { BrowserRouter as Redirect } from 'react-router-dom'
+// import { BrowserRouter as Redirect } from 'react-router-dom'
 
 class GamesList extends PureComponent {
 	
@@ -20,7 +20,7 @@ class GamesList extends PureComponent {
 	}
 	
 	renderGame = (game) => {
-		const {users, history} = this.props
+		const {history} = this.props
 		// console.log("game - ID ???: " + game.id)
 		const joinAndRedirect = () => {
 			this.props.joinGame(game.id)
@@ -60,26 +60,29 @@ class GamesList extends PureComponent {
 
 		const {games, users, authenticated, history} = this.props
 	
-
 		if (!authenticated){history.push(`/login`)}
+
+		const funcOne = () => {
+			this.props.createGame()
+		}
+
+		const funcTwo = () => {
+			this.props.getGames()
+			history.push(`/games/${this.props.games[0].id}`)
+		}
+	
+		const createAndRedirect = () => {
+			funcOne()
+			funcTwo()
+
+			// this.props.createGame()
+			// let newId = this.props.games[0].id + 1
+			// history.push(`/games/${newId}`)
+		}
 
 
 		if (games === null || users === null) return null
 		
-		// const funcOne = () => {
-		// 	this.props.createGame()
-		// }
-
-		// const funcTwo = () => {
-		// 	this.props.getGames()
-		// 	history.push(`/games/${this.props.games[0].id}`)
-		// }
-		const createAndRedirect = () => {
-			this.props.createGame()
-			let newId = this.props.games[0].id + 1
-			history.push(`/games/${newId}`)
-		}
-
 		return (<Paper className="outer-paper">
 		<Button
 			color="primary"
