@@ -1,5 +1,17 @@
-# Tic Tac Toe front end
+# Group project week: Build a multiplayer game
 
-This is the frontend for the game starter in which you can play Tic Tac Toe with a friend. It's build using the standard `create-react-app` so the usual `yarn start` can be used.
+Together with Anton Mladov: https://github.com/anton-mladenov 
 
-The backend (server) of this project must be running for the app to function correctly.
+Four days to build a multiplayer game. We chose to build a quiz app. The quiz questions are loaded from the Trivia api. 
+
+## Technologies used
+-Websockets
+-React
+-Redux
+-Koa
+-TypeORM
+-Postgres
+
+
+
+
